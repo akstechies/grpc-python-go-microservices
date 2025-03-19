@@ -1,0 +1,44 @@
+Here’s a step-by-step guide to create a gRPC server in Python and clients in Python and Go:
+
+✅ 1. Create order.proto File
+Define the gRPC service and messages.
+syntax = "proto3"; → Specifies that we're using Protocol Buffers v3.
+service OrderService → Defines the gRPC service.
+rpc CreateOrder → Defines the remote procedure call (RPC) method.
+OrderRequest → Defines the request structure.
+OrderResponse → Defines the response structure.
+
+✅ 2. Generate gRPC Code from order.proto
+
+=> Generate the Python and Go code using protoc:
+ - pip install grpcio grpcio-tools protobuf
+ - python -m grpc_tools.protoc -I. --python_out=. --grpc_python_out=. order.proto
+
+=> Generate Go Code:
+
+ for go also download from https://github.com/protocolbuffers/protobuf/releases and add to path
+ download the windows one and set path using 
+  - $env:PATH += ";D:\softwares\protoc-25.6-win64\bin"
+ and then check 
+  - protoc --version
+ 
+
+  - go install google.golang.org/protobuf/cmd/protoc-gen-go@latest
+  - go install google.golang.org/grpc/cmd/protoc-gen-go-grpc@latest
+  - protoc --go_out=. --go-grpc_out=. order.proto
+
+✅ 3. Create Python gRPC Server
+Create a Python server that implements the gRPC service.
+
+grpc_server.py
+
+✅ 4. Create Python gRPC Client
+Create a Python client to test the server.
+
+python_client.py
+
+
+RUN
+-  python grpc_server.py
+-   python python_client.py
+- cd to go project then - go run .
